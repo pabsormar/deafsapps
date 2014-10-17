@@ -32,7 +32,7 @@
 			curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));   // The full data to post in a HTTP 'POST' operation. To post a file, prepend a filename with '@' and use the full path
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);   // 'true' to return the transfer as a string of the return value of 'curl_exec()' instead of outputting it out directly
 			
-			// Disabling SSL Certificate support temporarly
+			// Disabling SSL Certificate support temporarily
 			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);   // 'false' to stop cURL from verifying the peer's certificate		
 			
 			// Execute POST

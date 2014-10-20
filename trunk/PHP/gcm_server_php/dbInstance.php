@@ -47,6 +47,9 @@
 			{
 				echo 'INSERT... <br />';
 				$queryResult = mysqli_query($this->con, "INSERT INTO " . DB_TABLE . " (" . DB_REFERID . "," . DB_REGID . "," . DB_TIMESTAMP . ") VALUES ('$referId', '$regId', CURRENT_TIMESTAMP)") or die('Failed to insert: ' . mysqli_error($this->con));
+				mysqli_query($this->con, "UPDATE " . DB_TABLE . " SET " . DB_REFERID . " = " .  DB_ID . " WHERE " . DB_REGID . " = '$regId'") or die('Failed to update: ' . mysqli_error($this->con));
+				$queryResult = mysqli_query($this->con, "SELECT " . DB_REFERID . " FROM " . DB_TABLE . " WHERE " . DB_REGID . " = '$regId'") or die('Failed to query: ' . mysqli_error($this->con)); 
+				echo $queryResult;
 			}
 			else
 			{

@@ -9,8 +9,16 @@
 	
 		$mDbInstance = new dbInstance;		
 		$mDbInstance->dbConnect();		
-		$mDbInstance->dbUpdate($referId, $regId);		
+		$newReferId = $mDbInstance->dbUpdate($referId, $regId);		
 		$mDbInstance->dbDisconnect();
+		
+		if (mysqli_num_rows($newReferId))
+		{
+			// Create an array to be JSON-encoded
+			$mArray = array("$newReferId");
+			header("Content-type: application/json");
+			echo json_encode(array("mArray" => $mArray));
+		}		
 	}
 	else
 		echo 'No input data';

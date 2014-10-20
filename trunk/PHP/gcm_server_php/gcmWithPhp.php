@@ -3,7 +3,7 @@
 	define('GOOGLE_API_KEY', 'AIzaSyCoDqoODh55jMEMLFA9DU3yENLXG3LA1Xk');
 
     // Replace with the real client registration IDs
-    $registrationIDs = array("APA91bHni70zbet4PWX2Q0x5aHgXW83bBU4ZKCxWSWqT5Kg4o0sQsCk2yDC2epshmfutCPFlyvXsdyVvKgQ06bvdOz50ZFoOiEyRpWDT023fk3or93bWEZOIXyaqeXqcxhrqW9h9-Hu0JpjylZlmqIva1Px9VrKs_EGK-Hc5WqLA8NhGYLqVGTA");
+    $registrationIDs = array("APA91bERXBifLfDQC8jJr-Dx0oANamovURdHQXcnfj8CImA1bWsriRhm2ks89psRGsz8KCvpXNqGSyDeHcULLd2DGkbErjuHwNC6WZXbcl8nVygBlUf7De2ZTYAeKO98Yo4OIH6FuDCMXtbcWvik6tzL89xqzaOi11iFUWjPkPbcP15S8t1zg8s");
     // $registrationIDs = array("APA91bEhpgSb1ksvZpWZ0G7amew7Vb_fsaZeoxkcOxJI6oc952rEivZ2M-nneWiXKqkiGXAf_d_1u-MZoLa8VYOwazr1R_fJWkEv3vI-YWcdN5xoS5r72YDPCAFe-QoDZ2l8ipsikJPAcT_-HfQ3TcItMKcEEKNn7KRYGGeAFYl-APF8pUOcZ0c");
 	
     // Message to be sent

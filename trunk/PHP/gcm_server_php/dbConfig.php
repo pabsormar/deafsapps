@@ -7,7 +7,6 @@
 	define('DB_DATABASE', 'test');
 	define('DB_TABLE', 'mTable');
 	define('DB_ID', '_id');
-	define('DB_REFERID', 'referId');
 	define('DB_REGID', 'gcm_regid');
 	define('DB_TIMESTAMP', 'created_at');
 

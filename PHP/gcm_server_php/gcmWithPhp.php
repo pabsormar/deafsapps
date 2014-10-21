@@ -3,8 +3,8 @@
 	define('GOOGLE_API_KEY', 'AIzaSyCoDqoODh55jMEMLFA9DU3yENLXG3LA1Xk');
 
     // Replace with the real client registration IDs
-    $registrationIDs = array("APA91bERXBifLfDQC8jJr-Dx0oANamovURdHQXcnfj8CImA1bWsriRhm2ks89psRGsz8KCvpXNqGSyDeHcULLd2DGkbErjuHwNC6WZXbcl8nVygBlUf7De2ZTYAeKO98Yo4OIH6FuDCMXtbcWvik6tzL89xqzaOi11iFUWjPkPbcP15S8t1zg8s");
-    // $registrationIDs = array("APA91bEhpgSb1ksvZpWZ0G7amew7Vb_fsaZeoxkcOxJI6oc952rEivZ2M-nneWiXKqkiGXAf_d_1u-MZoLa8VYOwazr1R_fJWkEv3vI-YWcdN5xoS5r72YDPCAFe-QoDZ2l8ipsikJPAcT_-HfQ3TcItMKcEEKNn7KRYGGeAFYl-APF8pUOcZ0c");
+    $registrationIDs = array("APA91bHXMVfmoOJOjfJpiVYvWnhQ8cbYYDZSAop2Zmx6PtyU-JoCLY691tlepzKb93rC7P-JERH_iW1YPuMnjkMegbdtWWhrpV6JoQBRh9yjQtW4DjaZPM8FhkQ1hlE-iPwh_dThOajD5a6UoTbmJphLqFLnTWpeXzEyOHErKgLTObbZDC5ZHFI");
+    // $registrationIDs = array("APA91bE6haKHO7OPkMOtmPUNAAZE0m5wfLttdyMx1ZE-eHZWtDDsNNJ8tb92gS5rPXOIRObSfx902O-1q5bMxeBq63M3WrBvhfxvez53ZnHGTbBAolbq3SE9i2A-jNsDmdbUCmh2vk4semkunElnP5reQlhUvblKCjh2aKkJpPsOAJ0FQTiUeWs");
 	
     // Message to be sent
     $message = "Hi, Swansea City fan!!";

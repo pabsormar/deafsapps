@@ -1,7 +1,7 @@
  <?php
 
 	// Declare database parameters as constants
-	define('DB_HOST', '90.193.50.245');
+	define('DB_HOST', 'localhost');
 	define('DB_USERNAME', 'rasPiGuest');
 	define('DB_PASSWORD', 'mysqlGUEST');
 	define('DB_DATABASE', 'gcmDataBase');

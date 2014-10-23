@@ -8,7 +8,7 @@
 	define('DB_TABLE', 'regIdTable');
 	define('DB_ID', '_id');
 	define('DB_REGID', 'gcm_regid');
-	define('DB_GROUP', 'group');
+	define('DB_GROUP', 'user_group');
 	define('DB_TIMESTAMP', 'created_at');
 
 ?>

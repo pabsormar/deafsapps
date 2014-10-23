@@ -4,7 +4,6 @@
 	include_once './dbConfig.php';
 	
 	$mDbInstance = new dbInstance;
-	
 	$mDbInstance->dbConnect();	
 	$mDbInstance->dbGetAllUsers();	
 	$mDbInstance->dbDisconnect();

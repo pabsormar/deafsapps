@@ -14,5 +14,5 @@
 		$mDbInstance->dbDisconnect();		
 	}
 	else
-		echo 'No input data';
+		echo 'No input data' . PHP_EOL;
 ?>

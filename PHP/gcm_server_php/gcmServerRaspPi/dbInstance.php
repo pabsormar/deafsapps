@@ -20,7 +20,7 @@
 			// Query the database to check whether it already exists; if not, it is created.
 			$queryResult = mysqli_query($this->con, "SELECT * FROM " . DB_TABLE);	
 			if (!$queryResult)     // '$queryResult' is FALSE if 'mysqli_query()' was not successful 
-			{
+			{ 
 				$queryResult = mysqli_query($this->con, "CREATE TABLE IF NOT EXISTS " . DB_TABLE . " 
 												(" . DB_ID . " int(11) NOT NULL AUTO_INCREMENT,
 												 " . DB_REGID . " text NOT NULL,

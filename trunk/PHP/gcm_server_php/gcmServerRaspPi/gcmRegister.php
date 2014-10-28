@@ -10,7 +10,7 @@
 	
 		$mDbInstance = new dbInstance;		
 		$mDbInstance->dbConnect();		
-		$newReferId = $mDbInstance->dbInsert($regId, $group);		
+		$newReferId = $mDbInstance->dbInsert($regId, $group, "");		
 		$mDbInstance->dbDisconnect();		
 	}
 	else

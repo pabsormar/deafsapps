@@ -40,15 +40,20 @@
 		}
 		
 		// This function accepts a 'gcm_regid' to be inserted into the database
-		public function dbInsert($regId, $group)
+		public function dbInsert($regId, $group, $oldRegId)
 		{			
-			// Query the database. If no row is retrieved, an insertion is carried out
+			// Query the database. If no row is retrieved, an insertion is carried out; otherwise, an update of the register is performed
 			$queryResult = mysqli_query($this->con, "SELECT * FROM " . DB_TABLE . " WHERE " . DB_REGID . " = '$regId'") or die('Failed to query: ' . mysqli_error($this->con));			
 			echo 'Number of matches: ' . mysqli_num_rows($queryResult) . PHP_EOL;
 			if (!mysqli_num_rows($queryResult))
 			{
 				echo 'INSERT...' . PHP_EOL;
 				$queryResult = mysqli_query($this->con, "INSERT INTO " . DB_TABLE . " (" . DB_REGID . "," . DB_GROUP . "," . DB_TIMESTAMP . ") VALUES ('$regId', '$group', CURRENT_TIMESTAMP)") or die('Failed to insert: ' . mysqli_error($this->con));
+			}
+			else
+			{
+				$queryResult = mysqli_query($this->con, "UPDATE " . DB_TABLE . " SET " . DB_REGID . " = '$regId' WHERE " . DB_REGID . " = '$oldRegId'") or die('Failed to insert: ' . mysqli_error($this->con));
+
 			}			
 		}
 		

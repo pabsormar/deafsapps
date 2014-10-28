@@ -34,25 +34,17 @@
 			// Close connection
 			curl_close($ch);
 			echo $result . PHP_EOL;
+
+			// If the GCM server has changed the "registration id", 'canonical_ids' is equal to 1
+			$dResult = json_decode($result);
+			if ($dResult->canonical_ids)
+			{
+				$retNewId = $dResult->results[0]->registration_id;
+				echo 'New Registration Id: ' . $retNewId . PHP_EOL;
+				return $retNewId;
+				//echo 'New Registration Id: ' . var_dump($dResult) . PHP_EOL;
+			}	
 		}	
-		
-		//ids=[]
-		//query= // get all user record from database
-		//for q in query:
-		//	ids.append(q.registration_id)
-		//	// some code
-		//	jsonmessage=json.dumps({
-		//		"registration_ids":ids,
-		//		"data":{
-		//		"message":message,
-		//		"time":datetime.datetime.today().isoformat(),
-		//		"sender":sender
-		//		}
-		//	})
-		//conn.send(jsonmessage)
-
-
-		
-
-	}	
+	}
+	
 ?>

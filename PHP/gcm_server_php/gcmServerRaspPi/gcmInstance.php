@@ -4,7 +4,10 @@
 	define('GOOGLE_API_KEY', 'AIzaSyCoDqoODh55jMEMLFA9DU3yENLXG3LA1Xk');
 
 	class gcmInstance
-	{		
+	{	
+		public $newId = '';	
+		public $error = '';
+
 		function __construct() {}
 		
 		// Sending Push Notification to one or several devices
@@ -35,15 +38,28 @@
 			curl_close($ch);
 			echo $result . PHP_EOL;
 
-			// If the GCM server has changed the "registration id", 'canonical_ids' is equal to 1
+			// If the GCM server has changed the "registration id", 'success' and 'canonical_ids' are both equal to 1
 			$dResult = json_decode($result);
-			if ($dResult->canonical_ids)
+
+			if ($dResult->success)
 			{
-				$retNewId = $dResult->results[0]->registration_id;
-				echo 'New Registration Id: ' . $retNewId . PHP_EOL;
-				return $retNewId;
-				//echo 'New Registration Id: ' . var_dump($dResult) . PHP_EOL;
-			}	
+				if ($dResult->canonical_ids)
+				{
+					$this->newId = $dResult->results[0]->registration_id;
+					echo '---New Registration Id: ' . $this->newId . PHP_EOL;
+					//echo 'New Registration Id: ' . var_dump($dResult) . PHP_EOL;
+				}
+
+				return true;
+			}
+			elseif ($dResult->results[0]->error)
+			{
+				$this->error = $dResult->results[0]->error;
+				echo '---Error when sending notification: ' . $this->error . PHP_EOL;
+
+				return false;
+			}
+				
 		}	
 	}
 	

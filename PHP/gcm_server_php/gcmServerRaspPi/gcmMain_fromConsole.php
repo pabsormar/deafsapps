@@ -8,7 +8,7 @@
 	if ($argc == 2)
 	{
 		$message = $argv[1];
-		//echo 'Message: ' . $message . PHP_EOL;
+		$gcmSuccess = false;
 		
 		$mDbInstance = new dbInstance;
 		$mDbInstance->dbConnect();
@@ -19,34 +19,37 @@
 		
 		for ($i = 0; $i < mysqli_num_rows($userRegIds); $i++)
 		{
-			$newRegId = "";			
-
 			$userArray = mysqli_fetch_row($userRegIds);
-			if ($i == 3)
+			// Send message to devices and getting back a new 'registration ID' in case it has been updated by the GCM server
+			$gcmSuccess = $mGcmInstance->sendNotification($userArray, $message);
+
+			if ($gcmSuccess)
 			{
-				// Send message to devices and getting back a new 'registration ID' in case it has been updated by the GCM server
-				$newRegId = $mGcmInstance->sendNotification($userArray, $message);
- 				// If the return value is not "", the database is updated ('dbInsert' with a third argument)
-				if ($newRegId != "")
+ 				// If the return value is not '', the entry has to be updated ('dbInsert' with a third argument)
+				if ($mGcmInstance->newId != '')
 				{
-					echo 'From dbInstance, result: ' . $newRegId . PHP_EOL;
-					$mDbInstance->dbInsert($newRegId, "", $userArray[0]);									
+					//echo 'From dbInstance, result: ' . $mGcmInstance->newId . PHP_EOL;
+					$resultQuery = $mDbInstance->dbInsert($mGcmInstance->newId, "", $userArray[0]);									
+					echo 'Update query result: ' . $resultQuery . PHP_EOL;
+					// If '0' is retrieved, no update has been performed, and therefore the entry is repeated
+					if ($resultQuery == 0)  
+					{
+						$resultQuery = $mDbInstance->dbDelete($userArray[0]);
+						echo 'Entry deleted' . PHP_EOL;
+					}
 				}
 			}
-		}
-
-		// Get all 'registration IDs' from database to delete duplicates
-                $userRegIds = $mDbInstance->dbGetAllUsers();
-		if (mysqli_num_rows($userRegIds) > 1)
-		{
-			echo "Number of matches: " . mysqli_num_rows($userRegIds) . PHP_EOL;
-			for ($i = 0; $i < mysqli_num_rows($userRegIds)-1; $i++)
+			else
 			{
-				echo "iteration: $i" . PHP_EOL;
-				$userArray = mysqli_fetch_row($userRegIds);
-				//$mDbInstance->dbDelete($userArray[0]);
+				if ($mGcmInstance->error != '')
+				{
+					//echo 'From dbInstance, error: ' . $mGcmInstance->error . PHP_EOL;
+					//$resultQuery = $mDbInstance->dbDelete($userArray[0]);
+					//echo 'Entry deleted: ' . $resultQuery . PHP_EOL;						
+				}
 			}
-
+			// Reset 'gcmInstance' values for next iteration
+			$mGcmInstance->newId = ''; $mGcmInstance->error = '';			
 		}
 		
 		mysqli_free_result($userRegIds);
@@ -54,10 +57,7 @@
 		$mDbInstance->dbDisconnect();		
 	}
 	// If there are two input arguments, they would be the message and a group name of users
-	elseif ($argc == 3)
-	{
-	
-	}
+	elseif ($argc == 3) { }
 	else
 		echo 'One or two input arguments must be passed to the script!!' . PHP_EOL;
 

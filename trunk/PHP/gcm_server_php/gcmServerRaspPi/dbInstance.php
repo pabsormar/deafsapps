@@ -23,7 +23,7 @@
 			{ 
 				$queryResult = mysqli_query($this->con, "CREATE TABLE IF NOT EXISTS " . DB_TABLE . " 
 												(" . DB_ID . " int(11) NOT NULL AUTO_INCREMENT,
-												 " . DB_REGID . " text NOT NULL,
+												 " . DB_REGID . " varchar(255) UNIQUE NOT NULL,
 												 " . DB_GROUP . " varchar(50),
 												 " . DB_TIMESTAMP . " timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, 
 												 PRIMARY KEY (" . DB_ID . ")
@@ -48,18 +48,22 @@
 			if (!mysqli_num_rows($queryResult))
 			{
 				echo 'INSERT...' . PHP_EOL;
-				$queryResult = mysqli_query($this->con, "INSERT INTO " . DB_TABLE . " (" . DB_REGID . "," . DB_GROUP . "," . DB_TIMESTAMP . ") VALUES ('$regId', '$group', CURRENT_TIMESTAMP)") or die('Failed to insert: ' . mysqli_error($this->con));
+				mysqli_query($this->con, "INSERT IGNORE INTO " . DB_TABLE . " (" . DB_REGID . "," . DB_GROUP . "," . DB_TIMESTAMP . ") VALUES ('$regId', '$group', CURRENT_TIMESTAMP)") or die('Failed to insert: ' . mysqli_error($this->con));
+				return mysqli_affected_rows($this->con);
 			}
 			else
 			{
-				$queryResult = mysqli_query($this->con, "UPDATE " . DB_TABLE . " SET " . DB_REGID . " = '$regId' WHERE " . DB_REGID . " = '$oldRegId'") or die('Failed to insert: ' . mysqli_error($this->con));
+				echo 'UPDATE...' . PHP_EOL;
+				mysqli_query($this->con, "UPDATE IGNORE " . DB_TABLE . " SET " . DB_REGID . " = '$regId' WHERE " . DB_REGID . " = '$oldRegId'") or die('Failed to update: ' . mysqli_error($this->con));
+				return mysqli_affected_rows($this->con);
 
 			}			
 		}
 		
 		public function dbDelete($regId)
 		{
-			$queryResult = mysqli_query($this->con, "DELETE FROM " . DB_TABLE . " WHERE ". DB_REGID . " = '$regId'") or die('Failed to delete: ' . mysqli_error($this->con));		
+			mysqli_query($this->con, "DELETE FROM " . DB_TABLE . " WHERE ". DB_REGID . " = '$regId'") or die('Failed to delete: ' . mysqli_error($this->con));	
+			return mysqli_affected_rows($this->con);	
 		}	
 		
 		public function dbGetOneUser($regId)

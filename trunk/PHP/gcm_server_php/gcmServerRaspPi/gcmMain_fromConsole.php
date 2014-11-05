@@ -43,9 +43,9 @@
 			{
 				if ($mGcmInstance->error != '')
 				{
-					//echo 'From dbInstance, error: ' . $mGcmInstance->error . PHP_EOL;
-					//$resultQuery = $mDbInstance->dbDelete($userArray[0]);
-					//echo 'Entry deleted: ' . $resultQuery . PHP_EOL;						
+					echo 'From dbInstance, error: ' . $mGcmInstance->error . PHP_EOL;
+					$resultQuery = $mDbInstance->dbDelete($userArray[0]);
+					echo 'Entry deleted: ' . $resultQuery . PHP_EOL;						
 				}
 			}
 			// Reset 'gcmInstance' values for next iteration

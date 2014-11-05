@@ -1,0 +1,54 @@
+
+# Custom error document
+##ErrorDocument 401 /error_pages/401.html     # Unauthorised
+##ErrorDocument 403 /error_pages/403.html     # Forbidden
+##ErrorDocument 404 /error_pages/404.html     
+##ErrorDocument 500 /error_pages/500.html     # Internal Server
+
+# Enables to direct web site visitors from on document within a web site to another
+##Redirect /old_dir/ http://www.yourdomain.com/new_dir/index.html
+
+# Password protection offered by the 'Apache Web Server'
+##AuthName "Member's Area Name"     # Name of the secure directory
+##AuthUserFile /path/to/password/file/.htpasswd     # Path to password file
+##AuthType Basic
+##require valid-user
+# The password file would contain something similar to the following text:
+##username:encryptedpassword
+##fred_smith:oCF9Pam/MXJg2
+
+# Deny access to specific visitors
+order deny,allow
+deny from all
+allow from 192.168.0.0/24
+# Allow access to a particular file within the directory
+<Files gcmRegister.php>
+  order deny,allow
+  allow from all
+</Files>
+
+# Shows a 403 Forbidden error if no index.html, index.php, etc. is found in the directory
+Options -Indexes
+
+# Preventing directory listing. It does not apply if 'Options -Indexes' is turned on
+IndexIgnore *
+
+# Preventing access to 'php.ini'
+##<FilesMatch "^php5?\.(ini|cgi)$">
+##Order Deny,Allow 
+##Deny from All 
+##Allow from env=REDIRECT_STATUS 
+##</FilesMatch>
+
+# Forcing scripts to display as source code, instead of executing
+##RemoveHandler cgi-script .pl .cgi .php .py 
+##AddType text/plain .pl .cgi .php .py
+
+# Ensuring media files are downloaded instead of played
+##AddType application/octet-stream .zip .mp3 .mp4
+
+# Setting up associations for encoded files
+##AddEncoding x-gzip .gz .tgz 
+##AddEncoding x-compress .Z
+
+

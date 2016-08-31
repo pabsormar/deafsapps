@@ -1,0 +1,32 @@
+\chapter{Justificación de la solución adoptada}
+\label{chap:justificacion}
+\onehalfspacing
+
+Este capítulo ilustra y describe la solución adoptada para la problemática planteada en el presente anteproyecto.
+
+La Figura \ref{fig:solucionTopologia} muestra un diagrama en el qu ese presentan las distintas entidades que componen la topología. 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{./00.Figures/solucionTopologia.eps}
+	\caption{\textit{Esquema de la solución adoptada.}}
+	\label{fig:solucionTopologia}
+\end{figure}
+
+\begin{enumerate}
+	\item Interfono exterior.
+	\item Auricular en el interior de la vivienda conectado a un dispositivo Raspberry Pi 2 B. 
+	\item Dispositivo móvil Android.
+\end{enumerate}
+
+El sistema requiere de un entorno WiFi, como el disponible habitualmente en cualquier vivienda. 
+
+El funcionamiento es el siguiente:
+\begin{itemize}
+	\item Un visitante acude a la vivienda y acciona el interfono exterior.
+	\item En el interior del inmueble el auricular suena con normalidad, indicando además el evento a la Raspberry Pi.
+	\item El teléfono móvil del usuario, en el interior de la vivienda, suena como si de una llamada se tratase.
+	\item Ambos dispositivos establecen un enlace directo gracias al framework de Android WiFi P2P\footnote{\url{https://developer.android.com/guide/topics/connectivity/wifip2p.html}}, permitiendo la comunicación entre ambos individuos.
+	\item Finalmente el inquilino, si así lo desea, abre la puerta de la vivienda desde su dispositivo móvil. La señal es recibida por la Raspberry Pi, que hace las veces de actuador. 
+\end{itemize}
+
+% % %
